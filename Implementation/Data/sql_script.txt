@@ -1,0 +1,70 @@
+create table if not exists tb_admin
+(
+	id int auto_increment
+		primary key,
+	login_name varchar(50) null comment 'login name',
+	password varchar(60) null comment 'password',
+	type tinyint null comment 'type 1admin 0general user',
+	board varchar(50) null comment 'board'
+);
+
+create table if not exists tb_alarm
+(
+	id int auto_increment comment 'id'
+		primary key,
+	name varchar(50) null comment 'alarm name',
+	quota_id int null comment 'quota id',
+	operator varchar(10) null comment 'operator',
+	threshold int null comment 'threshold',
+	level int null comment 'alarm level  1general 2severe',
+	cycle int null comment 'cycle(minute)',
+	webhook varchar(1000) null comment 'webhook',
+	constraint tb_alarm_name_uindex
+		unique (name)
+);
+
+create table if not exists tb_board
+(
+	id int auto_increment comment 'id'
+		primary key,
+	admin_id int default 1 null comment 'admin id',
+	name varchar(50) null comment 'board name',
+	quota varchar(100) default '0' null comment 'quota(trend use)',
+	device varchar(100) null comment 'device(accumulation)',
+	`system` tinyint default 0 null comment 'wether is system',
+	disable tinyint default 0 null comment 'wether is disable',
+	constraint tb_board_name_uindex
+		unique (name)
+);
+
+
+create table if not exists tb_gps
+(
+	id int not null comment 'id'
+		primary key,
+	subject varchar(50) null comment 'subject',
+	sn_key varchar(50) null comment 'sn key',
+	single_field tinyint null comment 'type(single,double)',
+	value_key varchar(50) null comment 'location',
+	separation varchar(10) null comment 'location seperation',
+	longitude varchar(20) null comment 'longitude',
+	latitude varchar(20) null comment 'latitude',
+	constraint tb_gps_subject_uindex
+		unique (subject)
+);
+
+create table if not exists tb_quota
+(
+	id int auto_increment comment 'id'
+		primary key,
+	name varchar(50) null comment 'quota name',
+	unit varchar(20) null comment 'quota unit',
+	subject varchar(50) null comment 'subject',
+	value_key varchar(50) null comment 'value key',
+	sn_key varchar(50) null comment 'sn key',
+	webhook varchar(1000) null comment 'webhook',
+	value_type varchar(10) null comment 'value type:Double,Inteter,Boolean',
+	reference_value varchar(100) null comment 'reference value',
+	constraint tb_quota_name_uindex
+		unique (name)
+);

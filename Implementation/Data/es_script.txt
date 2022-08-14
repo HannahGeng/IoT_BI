@@ -1,0 +1,30 @@
+{
+    "mappings": {
+        "properties": {
+            "alarm": {
+                "type": "boolean"
+            },
+            "deviceId": {
+                "type": "keyword"
+            },
+            "lastAlarm": {
+                "type": "datetime"
+            },
+            "level": {
+                "type": "long"
+            },
+            "online": {
+                "type": "boolean"
+            },
+            "quotaId": {
+                "type": "keyword"
+            },
+            "status": {
+                "type": "boolean"
+            },
+            "tag": {
+                "type": "keyword"
+            }
+        }
+    }
+}
